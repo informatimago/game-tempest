@@ -1,0 +1,61 @@
+# XcodeGen specification for the Rimward iOS app.
+# Generate the Xcode project with:  make project   (or: xcodegen generate)
+name: Rimward
+options:
+  bundleIdPrefix: com.informatimago
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+packages:
+  RimwardCore:
+    path: RimwardCore
+targets:
+  Rimward:
+    type: application
+    platform: iOS
+    sources:
+      - path: App/Sources
+      - path: App/Resources
+    dependencies:
+      - package: RimwardCore
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Rimward
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen: {}
+        UIRequiresFullScreen: true
+        UIStatusBarHidden: true
+        UIViewControllerBasedStatusBarAppearance: true
+        CADisableMinimumFrameDurationOnPhone: true
+        ITSAppUsesNonExemptEncryption: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.informatimago.rimward
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SWIFT_VERSION: "5.0"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_STYLE: Automatic
+        # Set your team here, or in Xcode (Signing & Capabilities):
+        DEVELOPMENT_TEAM: ""
+schemes:
+  Rimward:
+    build:
+      targets:
+        Rimward: all
+    run:
+      config: Debug
+    archive:
+      config: Release
